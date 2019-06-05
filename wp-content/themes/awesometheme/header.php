@@ -8,7 +8,7 @@
   <body <?php body_class(); ?>>
 
      <!-- <?php wp_nav_menu( array('theme_location' => 'primary') ); ?>  -->
-     <main>
+
        <!-- Personal info -->
        <div id="info" class="py-2 px-2 bg-dark-blue  text-light d-flex justify-content-left align-items-center ">
          <span class="ml-5 d-block"><i class="fas fa-map-marker-alt text-secondary mr-2"></i>
@@ -66,3 +66,5 @@
              </div>
          </div>
        </div>
+  <!-- Below header container -->
+    <div id="container">
