@@ -9,11 +9,24 @@
 
      <!-- <?php wp_nav_menu( array('theme_location' => 'primary') ); ?>  -->
      <main>
-       <nav id="navBar" class="navbar nav-position">
-         <div id="logoWrapper" class=" d-inline">
-           <a class="logo-design text-dark-blue" href="#">Portfolio</a>
+       <!-- Personal info -->
+       <div id="info" class="py-2 px-2 bg-dark-blue  text-light d-flex justify-content-left align-items-center ">
+         <span class="ml-5 d-block"><i class="fas fa-map-marker-alt text-secondary mr-2"></i>
+              Manchester NH
+         </span>
+         <span class="ml-5 d-block">
+               <i class="fas fa-envelope text-secondary mr-2"></i>
+           Ryan.lackey1@yahoo.com
+         </span>
+      </div>
+
+    <!-- Nav bar with logo and menu -->
+       <nav id="navBar" class="navbar bg-white sticky-top z-index-50 py-3">
+
+
+         <div id="logoWrapper" class=" py-1 px-2 ml-5 d-inline">
+           <a class="logo-design text-white" href="<?php echo site_url();?>">Portfolio</a>
         </div>
-         <!-- <button id="togglerBtn" type="button" class="toggler-btn" > -->
          <div id="toggler" >
             <input type="checkbox" id="burgerId" class="burger toggler-btn">
             <div class="hamburger">
@@ -22,7 +35,6 @@
               <span></span>
             </div>
           </div>
-         <!-- </button> -->
        </nav>
 
        <!-- Menu Modal -->

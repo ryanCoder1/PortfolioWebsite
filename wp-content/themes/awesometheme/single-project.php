@@ -25,7 +25,7 @@
         while (have_posts()):
           the_post();
           ?>
-          <div class="single-post-entry col-xs-12 col-sm-10 col-md-6 ml-4 bg-white p-3">
+          <article class="single-post-entry col-xs-12 col-sm-10 col-md-6 ml-4 bg-white p-3">
 
             <?php
             if ( has_post_thumbnail() ): ?>
@@ -36,7 +36,7 @@
             <h3 class="title text-dark-blue"><?php the_title(); ?></h3>
             <p><?php the_content(); ?></p>
 
-          </div>
+          </article>
         <?php endwhile;
         wp_reset_postdata();
       endif; ?>

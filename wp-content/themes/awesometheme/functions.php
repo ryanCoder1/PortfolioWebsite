@@ -55,8 +55,74 @@ function codex_custom_init() {
   );
   register_post_type('project',$args);
 }
+
 // Hooking up our function to theme setup
 add_action( 'init', 'codex_custom_init' );
+
+
+
+$defaults = array(
+	'default-image'          => '',
+	'width'                  => 0,
+	'height'                 => 0,
+	'flex-height'            => false,
+	'flex-width'             => false,
+	'uploads'                => true,
+	'random-default'         => false,
+	'header-text'            => true,
+	'default-text-color'     => '',
+	'wp-head-callback'       => '',
+	'admin-head-callback'    => '',
+	'admin-preview-callback' => '',
+);
+add_theme_support( 'custom-header', $defaults );
+
+
+add_theme_support( 'custom-background', array(
+      'default-color'    => '000000',
+      'default-image'          => '',
+      'default-repeat'         => 'no-repeat',
+      'default-position-x'     => 'left',
+      'default-position-y'     => 'top',
+      'default-size'           => 'cover',
+      'default-attachment'     => 'fixed',
+      'wp-head-callback' => 'wpse_189361_custom_background_cb',
+
+
+));
+
+// background image for specific section div
+function wpse_189361_custom_background_cb() {
+    ob_start();
+
+    _custom_background_cb(); // Default handler
+
+    $style = ob_get_clean();
+    $style = str_replace( 'body.custom-background', '.blogs-image', $style );
+
+    echo $style;
+}
+// change comment form fields order
+
+function mo_comment_fields_custom_order( $fields ) {
+    	$comment_field = $fields['comment'];
+    	$author_field = $fields['author'];
+    	$email_field = $fields['email'];
+    	$url_field = $fields['url'];
+    	unset( $fields['comment'] );
+    	unset( $fields['author'] );
+    	unset( $fields['email'] );
+    	unset( $fields['url'] );
+    	// the order of fields is the order below, change it as needed:
+
+    	$fields['author'] = $author_field;
+    	$fields['email'] = $email_field;
+    	$fields['url'] = $url_field;
+      $fields['comment'] = $comment_field;
+    	// done ordering, now return the fields:
+  	return $fields;
+}
+add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
 
 add_theme_support( 'post-thumbnails' );
 
