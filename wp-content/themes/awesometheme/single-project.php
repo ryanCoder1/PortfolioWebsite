@@ -5,16 +5,10 @@
 
 <section id="singlePostSection" class="px-3 py-5 bg-light">
     <div class="col-xs-11 col-sm-8 col-md-12   py-3">
-
         <?php
         $post = get_queried_object();
-        var_dump(get_post_type());
         $postType = get_post_type_object(get_post_type($post)); ?>
-
-         ?>
-            <h3 class="my-2 text-secondary text-left"><?php echo ($postType) ? esc_html($postType->labels->singular_name).'s' : '' ?> </h3>
-
-
+     <h3 class="my-2 text-secondary text-left"><?php echo ($postType) ? esc_html($postType->labels->singular_name) : '' ?> </h3>
     </div>
 
       <div class="single-post-wrapper mt-5 d-flex justify-content-center align-items-top">
@@ -34,6 +28,7 @@
            endif;
             ?>
             <h3 class="title text-dark-blue"><?php the_title(); ?></h3>
+            <p class="text-dark-blue">Website developer since: <span class="text-secondary"><?php the_date() ?></span></p>
             <p><?php the_content(); ?></p>
 
           </article>

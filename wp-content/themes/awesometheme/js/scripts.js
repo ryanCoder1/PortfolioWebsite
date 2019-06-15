@@ -19,6 +19,7 @@ $.fn.animateListItems = function(animVal, animSpeed, delayInc, initialDelay){
        inc = inc + delayInc;
     });
   }
+
   //show modal when services anchor is clicked
   $('.toggler-btn').change(function(){
     if(this.checked){
@@ -59,5 +60,65 @@ $.fn.animateListItems = function(animVal, animSpeed, delayInc, initialDelay){
   });
 
 
+ //function = add class to element/s when scroll
+ //variables:
+ //addId = the id of the element e.g. "#something"
+ //addClass = the class to add e.g. "something"
+
+ $.fn.addClassAnimate = function(addId, addClass){
+    var wHScroll;
+    var hWindow = $(window).height();
+    var addClass = '' + addClass + '';
+    var addId = '' + addId + '';
+    var offsetVal = $(addId).offset();
+         offsetVal = offsetVal['top'];
+    $(window).scroll(function(){
+        var curWindow = $(document).scrollTop();
+        wHScroll = curWindow + hWindow;
+
+          if($(addId).hasClass('doneScroll') !== true){
+            if(wHScroll > offsetVal){
+              $(addId).addClass(addClass);
+              $(addId).addClass('doneScroll');
+            }
+        }
+    });
+  }
+  // function calls for addClassAnimate
+  $('#aboutInfo').addClassAnimate('#aboutInfo', 'about-info');
+  $('#personalImage').addClassAnimate('#personalImage', 'personal-image-animate');
+  $('#techInfo li').addClassAnimate('#techInfo li', 'tech-info-li');
+
+  // Ajax call for Contact form
+  $('#contactForm').on('submit', function(e){
+    e.preventDefault();
+      let postVar =  $(this).serialize();
+      let ajaxurl = $('#admin-ajax').val();
+    // Test question to stop bots
+    if($('#testQAnswer').val() == 10){
+          $.post(
+            ajaxurl,
+            {
+                action: 'get_post', // the action to pass to the WordPress hook, and then do_action()
+                data: postVar
+            })
+            .done(function( data ) {
+
+              let datas = JSON.parse(data);
+                if(datas.success != ''){
+                    $('#contactResponse').html('<span class="bg-success border-radius-7">' + datas.success + '</span>');
+                  }
+                else if(datas.msg != ''){
+                    $('#contactResponse').html('<span class="bg-danger border-radius-7">' + datas.msg + '</span>');
+                  }
+                  else if(datas.nosuccess != ''){
+                      $('#contactResponse').html('<span class="bg-danger border-radius-7">' + datas.nosuccess + '</span>');
+                    }
+            });
+
+      }else{
+        $('#contactResponse').html('<span class="bg-danger border-radius-7">Math question must be correct to send message!</span>');
+      }
+});
 
 })(jQuery);

@@ -98,7 +98,7 @@ function wpse_189361_custom_background_cb() {
     _custom_background_cb(); // Default handler
 
     $style = ob_get_clean();
-    $style = str_replace( 'body.custom-background', '.blogs-image', $style );
+    $style = str_replace( 'body.custom-background', '.posts-image', $style );
 
     echo $style;
 }
@@ -125,5 +125,68 @@ function mo_comment_fields_custom_order( $fields ) {
 add_filter( 'comment_form_fields', 'mo_comment_fields_custom_order' );
 
 add_theme_support( 'post-thumbnails' );
+
+
+
+//
+// AJAX calls
+//
+
+// process all wp_ajax_* calls
+function core_add_ajax_hook() {
+    /* Theme only, we already have the wp_ajax_ hook firing in wp-admin */
+    if ( ! defined( 'WP_ADMIN' ) && isset( $_REQUEST['action'] ) ) {
+        do_action( 'wp_ajax_' . $_REQUEST['action'] );
+    }
+}
+add_action( 'init', 'core_add_ajax_hook' );
+
+function wp_ajax_get_post_callback_mail_function() {
+      $postVar = array();
+
+      parse_str($_POST['data'], $postVar);
+
+      if(empty($postVar['name'])){
+          echo json_encode(array('msg' => 'Name field must be filled in'));
+          exit();
+        }
+      else if(empty($postVar['message'] )){
+          echo json_encode(array('msg' => 'Message field must be filled in'));
+          exit();
+        }
+      else if(!filter_var($postVar['email'], FILTER_VALIDATE_EMAIL)){
+          echo json_encode(array('msg' => 'Email address must be valid'));
+          exit();
+       }
+      else{
+          $to = 'ryan.lackey1@yahoo.com';
+          $subject = 'RL Interest';
+          $body = '
+          <table>
+          <tr>
+          <th>Interested Customer</th>
+          </tr>
+          <tr>
+          <td>'. $postVar['name'] .'</td>
+          </tr>
+          <tr>
+          <td>'. $postVar['email'] .'</td>
+          </tr>
+          <tr>
+          <td>'. $postVar['message'] .'</td>
+          </tr>
+          </table>';
+          $headers = array('Content-Type: text/html; charset=UTF-8');
+
+          if(wp_mail($to, $subject, $body, $headers)){
+            echo json_encode(array('success' => 'Email was sent successfully!'));
+            exit();
+          }else{
+            echo json_encode(array('nosuccess' => 'Email could not be sent at this time. Please try again later.'));
+          }
+
+      }
+}
+add_action( 'wp_ajax_get_post', 'wp_ajax_get_post_callback_mail_function' );
 
  ?>

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Handlee&display=swap" rel="stylesheet">
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
@@ -10,13 +11,13 @@
      <!-- <?php wp_nav_menu( array('theme_location' => 'primary') ); ?>  -->
 
        <!-- Personal info -->
-       <div id="info" class="py-2 px-2 bg-dark-blue  text-light d-flex justify-content-left align-items-center ">
-         <span class="ml-5 d-block"><i class="fas fa-map-marker-alt text-secondary mr-2"></i>
+       <div id="info" class="py-2 px-1 bg-dark-blue  text-brown font-weight-bold d-flex flex-column flex-sm-row ">
+         <span class="ml-4 d-block"><i class="fas fa-map-marker-alt text-light mr-2"></i>
               Manchester NH
          </span>
-         <span class="ml-5 d-block">
-               <i class="fas fa-envelope text-secondary mr-2"></i>
-           Ryan.lackey1@yahoo.com
+         <span class="ml-4 d-block">
+               <i class="fas fa-envelope text-light mr-2"></i>
+           RyanLackeyWebDeveloper@yahoo.com
          </span>
       </div>
 
@@ -24,8 +25,8 @@
        <nav id="navBar" class="navbar bg-white sticky-top z-index-50 py-3">
 
 
-         <div id="logoWrapper" class=" py-1 px-2 ml-5 d-inline">
-           <a class="logo-design text-white" href="<?php echo site_url();?>">Portfolio</a>
+         <div id="logoWrapper" class="  pl-2 ml-1 d-inline bg-dark-blue">
+           <a class="logo-design text-white" href="<?php echo site_url();?>"><small class="text-white font-weight-bold">Portfolio</small><span class="bg-light text-dark-blue ml-2 border-radius-7 p-1">Ryan Lackey</span></a>
         </div>
          <div id="toggler" >
             <input type="checkbox" id="burgerId" class="burger toggler-btn">
@@ -58,7 +59,7 @@
                    <a id="servicesA" class="nav-design" href="#">Services</a>
                  </li>
                  <li >
-                   <a class="nav-design" href="#">Contact</a>
+                   <a class="nav-design" href="">Contact</a>
                  </li>
 
 
